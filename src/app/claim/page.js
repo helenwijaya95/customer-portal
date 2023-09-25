@@ -73,22 +73,19 @@ const Claim = () => {
   return (
 
     <Box minH='calc(100vh - 80px)'>
-      <Container>
-        <Heading>Claim</Heading>
+      <Heading>Claim</Heading>
 
-        {isSignedIn ?
-          <>
-            <Button size='md' onClick={() => push('/claim/submit-form')}>Submit Claim</Button>
-            <Text>User is logged in</Text>
-            {(!isFetching && data.length > 0)
-              ? <CustomTable defaultData={data} columns={columns} />
-              : 'Loading...'}
-          </>
-          :
-          <></>
-        }
-      </Container>
-
+      {isSignedIn ?
+        <>
+          <Button size='md' onClick={() => push('/claim/submit-form')}>Submit Claim</Button>
+          <Text>User is logged in</Text>
+          {(!isFetching && data.length > 0)
+            ? <CustomTable defaultData={data} columns={columns} />
+            : 'Loading...'}
+        </>
+        :
+        <></>
+      }
     </Box>
   )
 }
