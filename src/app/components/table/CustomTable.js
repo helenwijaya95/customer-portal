@@ -21,6 +21,7 @@ const CustomTable = ({ defaultData, columns }) => {
   const [displayEmail, setDisplayEmail] = useState([])
   const columnHelper = createColumnHelper()
 
+  // check email visibility
   const isShowing = (cell) => {
     const id = cell?.row?.original?.id
     const findEmail = displayEmail.find((email) => {
@@ -59,6 +60,7 @@ const CustomTable = ({ defaultData, columns }) => {
   }
 
   const columnConfig = columns.map(col => {
+    // email cell: masked text
     if (col.accessor === 'email') {
       return columnHelper.accessor(col.accessor, {
         header: col.display,
@@ -80,6 +82,8 @@ const CustomTable = ({ defaultData, columns }) => {
         footer: info => info.column.id,
       })
     }
+
+    // cell with image
     if (col.accessor === 'avatar') {
       return columnHelper.accessor(col.accessor, {
         header: col.display,
@@ -119,7 +123,6 @@ const CustomTable = ({ defaultData, columns }) => {
 
   return (
     <>
-      <h1>Custom Table 2</h1>
       <Table>
         <Thead>
           {customTable.getHeaderGroups().map(headerGroup => (

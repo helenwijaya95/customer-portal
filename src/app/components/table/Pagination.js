@@ -102,7 +102,6 @@ const Pagination = ({ table }) => {
             </option>
           ))}
         </Select>
-        {/* {dataQuery.isFetching ? 'Loading...' : null} */}
       </Flex>
 
       {/* next, last */}
