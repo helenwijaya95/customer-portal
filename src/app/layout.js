@@ -1,7 +1,13 @@
-import './globals.css'
-import { Inter } from 'next/font/google'
 
-const inter = Inter({ subsets: ['latin'] })
+import './styles/globals.css'
+import { Open_Sans } from 'next/font/google'
+import Header from './components/Header'
+import Footer from './components/Footer'
+import AuthProvider from './components/providers/AuthProvider'
+import UIProvider from './components/providers/UIProvider'
+import StoreProvider from './components/providers/StoreProvider'
+import { Container } from '@chakra-ui/react'
+const openSans = Open_Sans({ subsets: ['latin'] })
 
 export const metadata = {
   title: 'Create Next App',
@@ -9,9 +15,27 @@ export const metadata = {
 }
 
 export default function RootLayout({ children }) {
+  const headerList = [
+    { name: 'Home', path: '/' },
+    { name: 'Portfolio', path: 'portfolio' },
+    { name: 'Claim', path: '/claim' }]
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
+      <body className={openSans.className}>
+        <>
+          <StoreProvider>
+            <AuthProvider>
+              <UIProvider>
+                <Header list={headerList} />
+                <Container p='10px' maxW="900px">
+                  {children}
+                </Container>
+                <Footer />
+              </UIProvider>
+            </AuthProvider>
+          </StoreProvider>
+        </>
+      </body>
+    </html >
   )
 }

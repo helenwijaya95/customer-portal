@@ -1,95 +1,117 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+'use client'
+import React, { useState, useEffect } from 'react'
+import { Box, Heading } from '@chakra-ui/react'
+import axios from 'axios'
+import CustomTable from './components/table/CustomTable'
+import Profile from './components/Profile'
+import { useSelector, useDispatch } from 'react-redux'
+import { useRouter } from 'next/navigation'
+import { useSession, signIn, signOut } from 'next-auth/react'
 
-export default function Home() {
+const baseURL = "https://reqres.in/api/users";
+
+const Index = () => {
+  const { data: session, status } = useSession();
+
+  const { push } = useRouter();
+  const [users, setUsers] = useState([]);
+  const [isSignedIn, setIsSignedIn] = useState(false);
+  const [isFetching, setisFetching] = useState(false);
+  const filterName = (data, chars) => {
+    const filtered = data.filter(d =>
+      d['first_name'].charAt(0).toUpperCase() === chars[0] ||
+      d['last_name'].charAt(0).toUpperCase() === chars[1]
+    )
+    return filtered;
+  }
+
+  const columns = [
+    {
+      display: "Avatar",
+      accessor: "avatar"
+    },
+    {
+      display: "First Name",
+      accessor: "first_name"
+    },
+    {
+      display: "Last Name",
+      accessor: "last_name"
+    },
+    {
+      display: "Email",
+      accessor: "email",
+    },
+  ]
+
+  useEffect(() => {
+
+    let totalPage;
+    let usersTemp = []
+    const fetchUsers = async () => {
+      setisFetching(true)
+      try {
+        const respTotal = await axios.get(baseURL);
+        if (respTotal && respTotal.data) {
+          totalPage = respTotal.data["total_pages"]
+          usersTemp = usersTemp.concat(respTotal.data.data)
+          if (totalPage > 1) {
+            for (let i = 2; i <= totalPage; i++) {
+              console.log('loop')
+              console.log(i)
+              const response = await axios.get(`${baseURL}?page=${i}`);
+              usersTemp = usersTemp.concat(response.data.data)
+            }
+          }
+          const filteredUser = filterName(usersTemp, ['G', 'W'])
+          setUsers(filteredUser)
+          setisFetching(false)
+        }
+      } catch (e) {
+        console.error(e)
+      }
+    }
+
+    if (isSignedIn) fetchUsers();
+
+  }, [isSignedIn])
+
+  useEffect(() => {
+    console.log(status)
+    console.log(session)
+
+    if (status !== 'loading') {
+      if (status == 'unauthenticated' && !session) {
+        console.log('no session')
+        setIsSignedIn(false)
+        push('/api/auth/signin')
+      } else {
+        console.log(session)
+        setIsSignedIn(true)
+      }
+    }
+  }, [session, status])
+
+
+
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+    <Box minH='calc(100vh - 80px)'>
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+      {/* user list */}
+      {isSignedIn ?
+        <>
+          <Profile session={session} status={status} signIn={signIn} signOut={signOut} />
+          <Heading>Index</Heading>
+          {(!isFetching && users.length > 0)
+            ? <CustomTable defaultData={users} columns={columns} />
+            : 'Loading...'}
+        </>
+        :
+        <></>
+      }
+    </Box >
   )
 }
+
+export default Index;
