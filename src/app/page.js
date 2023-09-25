@@ -7,6 +7,7 @@ import Profile from './components/Profile'
 import { useSelector, useDispatch } from 'react-redux'
 import { useRouter } from 'next/navigation'
 import { useSession, signIn, signOut } from 'next-auth/react'
+import CardList from './components/CardList'
 
 const baseURL = "https://reqres.in/api/users";
 
@@ -41,6 +42,21 @@ const Index = () => {
     {
       display: "Email",
       accessor: "email",
+    },
+  ]
+
+  const policyData = [
+    {
+      heading: 'Clinical',
+      subheading: 'Medical Protection',
+      bodyText1: 'Policy Number: 1111',
+      bodyText2: 'Policy Period: 21 November 2023 - 21 November 2024'
+    },
+    {
+      heading: 'Dental',
+      subheading: 'Medical Protection',
+      bodyText1: 'Policy Number: 2222',
+      bodyText2: 'Policy Period: 21 November 2023 - 21 November 2024'
     },
   ]
 
@@ -93,8 +109,6 @@ const Index = () => {
   }, [session, status])
 
 
-
-
   return (
     <Box minH='calc(100vh - 80px)'>
 
@@ -102,7 +116,9 @@ const Index = () => {
       {isSignedIn ?
         <>
           <Profile session={session} status={status} signIn={signIn} signOut={signOut} />
-          <Heading>Index</Heading>
+          <Heading>My Coverage</Heading>
+          <CardList dataList={policyData} />
+          {/* dependant list */}
           {(!isFetching && users.length > 0)
             ? <CustomTable defaultData={users} columns={columns} />
             : 'Loading...'}
