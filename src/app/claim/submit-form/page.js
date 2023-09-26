@@ -1,18 +1,12 @@
 'use client'
-import { Button, List, Text, ListItem, ListIcon, Box } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from 'react-redux'
-import { setCurrentStep } from "@/app/store/formSlice";
+import { Button, List, Text, ListItem, ListIcon, Box, Heading } from "@chakra-ui/react";
+import { useEffect } from "react";
+import { useSelector } from 'react-redux'
 import { useRouter } from "next/navigation";
-import Stepper from "@/app/components/multistep-form/Stepper";
-import Link from "next/link";
 import { CheckIcon } from "@chakra-ui/icons";
 const SubmitForm = () => {
   const formState = useSelector((state) => state.form)
   const currentStep = useSelector((state) => state.form.currentStep)
-  const [formData, setFormData] = useState({})
-  const dispatch = useDispatch();
-  const parentPath = '/claim/submit-form'
 
   const { push } = useRouter();
   useEffect(() => {
@@ -23,12 +17,13 @@ const SubmitForm = () => {
 
   return (
     <>
-      <h1>Submit form</h1>
       <Text>
         This form takes about 10 minutes to complete.
       </Text>
       <Box>
-        You will need:
+        <Heading as='h3' size='sm'>
+          You will need:
+        </Heading>
         <List spacing={3}>
           <ListItem>
             <ListIcon as={CheckIcon} color='green.500' />

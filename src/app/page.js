@@ -2,13 +2,14 @@
 import React, { useState, useEffect } from 'react'
 import { Box, Heading } from '@chakra-ui/react'
 import axios from 'axios'
-import CustomTable from './components/table/CustomTable'
-import Profile from './components/Profile'
+import CustomTable from '@/components/table/CustomTable'
+import Profile from '@/components/Profile'
 import { useSelector, useDispatch } from 'react-redux'
 import { useRouter } from 'next/navigation'
 import { useSession, signIn, signOut } from 'next-auth/react'
-import CardList from './components/CardList'
-import { setUser } from './store/userSlice'
+import CardList from '@/components/CardList'
+import { setUser } from '@/store/userSlice'
+import Loader from '@/components/Loader'
 const baseURL = "https://reqres.in/api/users";
 
 const Index = () => {
@@ -82,8 +83,6 @@ const Index = () => {
           usersTemp = usersTemp.concat(respTotal.data.data)
           if (totalPage > 1) {
             for (let i = 2; i <= totalPage; i++) {
-              console.log('loop')
-              console.log(i)
               const response = await axios.get(`${baseURL}?page=${i}`);
               usersTemp = usersTemp.concat(response.data.data)
             }
@@ -102,15 +101,16 @@ const Index = () => {
   }, [])
 
   useEffect(() => {
-    if (session)
+    if (session) {
       dispatch(setUser({
         name: session.user.name,
         email: session.user.email
       }))
+    }
   }, [session])
 
   if (status === "loading") {
-    return "Authenticating..."
+    return <Loader text='Authenticating...' />
   }
   if (status !== 'authenticated') {
     return <p>Access Denied</p>
@@ -118,7 +118,6 @@ const Index = () => {
 
   return (
     <Box minH='calc(100vh - 80px)'>
-
       {/* user list */}
       {isSignedIn ?
         <>
@@ -128,7 +127,8 @@ const Index = () => {
           {/* dependant list */}
           {(!isFetching && users.length > 0)
             ? <CustomTable defaultData={users} columns={columns} />
-            : 'Loading2...'}
+            : <Loader text='Retrieving data...' />
+          }
         </>
         :
         <></>

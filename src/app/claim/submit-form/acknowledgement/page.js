@@ -1,5 +1,5 @@
 'use client'
-import { setCurrentStep } from "@/app/store/formSlice"
+import { setCurrentStep } from "@/store/formSlice"
 import { Heading } from "@chakra-ui/react"
 import { useEffect } from "react"
 import { useDispatch } from "react-redux"

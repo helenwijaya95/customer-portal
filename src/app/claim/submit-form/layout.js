@@ -1,6 +1,6 @@
 'use client'
-import Stepper from "@/app/components/multistep-form/Stepper"
-import StoreProvider from "@/app/components/providers/StoreProvider"
+import Stepper from "@/components/multistep-form/Stepper"
+import StoreProvider from "@/components/providers/StoreProvider"
 import { useSelector } from "react-redux"
 useSelector
 const FormLayout = ({ children }) => {

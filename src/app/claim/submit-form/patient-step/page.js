@@ -4,11 +4,11 @@ import { useDispatch, useSelector } from "react-redux"
 import { useRouter } from 'next/navigation'
 import { useForm } from "react-hook-form"
 import { Box, FormLabel } from "@chakra-ui/react"
-import { setCurrentStep, setFormData } from "@/app/store/formSlice"
-import Form from "@/app/components/multistep-form/Form"
-import Field from "@/app/components/multistep-form/Field"
-import ButtonField from "@/app/components/multistep-form/ButtonField"
-import InputField from "@/app/components/multistep-form/InputField"
+import { setCurrentStep, setFormData } from "@/store/formSlice"
+import Form from "@/components/multistep-form/Form"
+import Field from "@/components/multistep-form/Field"
+import ButtonField from "@/components/multistep-form/ButtonField"
+import InputField from "@/components/multistep-form/InputField"
 
 const PatientStep = () => {
   const defaultData = {

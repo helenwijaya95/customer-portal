@@ -1,14 +1,14 @@
 'use client'
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { setCurrentStep, setFormData } from "@/app/store/formSlice"
+import { setCurrentStep, setFormData } from "@/store/formSlice"
 import { useRouter } from 'next/navigation'
 import { useForm } from "react-hook-form"
 import { Box, FormLabel } from "@chakra-ui/react"
-import Form from "@/app/components/multistep-form/Form"
-import Field from "@/app/components/multistep-form/Field"
-import ButtonField from "@/app/components/multistep-form/ButtonField"
-import InputField from "@/app/components/multistep-form/InputField"
+import Form from "@/components/multistep-form/Form"
+import Field from "@/components/multistep-form/Field"
+import ButtonField from "@/components/multistep-form/ButtonField"
+import InputField from "@/components/multistep-form/InputField"
 const ClinicStep = () => {
   const dataState = useSelector((state) => state.form.steps)
   const dispatch = useDispatch();
