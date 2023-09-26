@@ -9,7 +9,7 @@ const Header = ({ list }) => {
       <Flex>
         <Center pt='10px' pb='20px' w='100px'>
           <Link href="/" w='auto'>
-            <Image src={logo} alt="logo" width={60} height={60} />
+            <Image priority='false' src={logo} alt="logo" width={60} height={60} />
           </Link>
         </Center>
         <Center>

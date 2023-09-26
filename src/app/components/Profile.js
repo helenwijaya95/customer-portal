@@ -11,10 +11,12 @@ const Profile = ({ session, status, signIn, signOut }) => {
           <Center>
             {
               session.user.image ?
-                (<Image width='80px' height='80px' borderRadius='50%' src={session.user.image}
+                (<Image
+                  priority="false" width='80px' height='80px' borderRadius='50%' src={session.user.image}
                   alt='profile picture' />) :
 
-                (<ImageNext width='80' height='80' borderRadius='50%' src={defaultProfPic} alt='profile picture' />)
+                (<ImageNext
+                  priority="false" width='80' height='80' borderRadius='50%' src={defaultProfPic} alt='profile picture' />)
             }
           </Center>
 
