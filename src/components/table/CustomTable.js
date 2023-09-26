@@ -122,7 +122,7 @@ const CustomTable = ({ defaultData, columns }) => {
   }, [defaultData])
 
   return (
-    <>
+    <Box className="custom-table">
       <Table>
         <Thead>
           {customTable.getHeaderGroups().map(headerGroup => (
@@ -152,7 +152,7 @@ const CustomTable = ({ defaultData, columns }) => {
         </Tbody>
       </Table>
       <Pagination table={customTable} />
-    </>
+    </Box>
   )
 }
 

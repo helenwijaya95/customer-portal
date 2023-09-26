@@ -55,7 +55,7 @@ const Portfolio = () => {
     },
   ]
   return (
-    <Box minH='calc(100vh - 80px)'>
+    <Box>
       {(!isFetching && data.length > 0)
         ? <CustomTable defaultData={data} columns={COLUMNS} />
         : <Loader text='Retrieving data...' />}

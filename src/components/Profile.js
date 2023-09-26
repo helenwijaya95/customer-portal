@@ -21,7 +21,7 @@ const Profile = ({ user }) => {
                 priority="false" width='80' height='80' borderRadius='50%' src={defaultProfPic} alt='profile picture' />)
           }
         </Center>
-        <Heading textAlign='center' as='h3' size='lg'>Welcome,<br />{user.name}</Heading>
+        <Heading textAlign='center' as='h3' size='lg' fontWeight='400'>Welcome,<br />{user.name}</Heading>
       </Flex>
     </Center >
   )

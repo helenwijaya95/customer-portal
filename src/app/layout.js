@@ -18,7 +18,9 @@ export default function RootLayout({ children }) {
   const headerList = [
     { name: 'Home', path: '/' },
     { name: 'Portfolio', path: '/portfolio' },
-    { name: 'Claim', path: '/claim' }]
+    { name: 'Claim', path: '/claim' },
+    { name: 'My Coverage', path: '/my-coverage' }
+  ]
   const footerList = [
     {
       header: 'Contact',
@@ -45,14 +47,11 @@ export default function RootLayout({ children }) {
             <AuthProvider>
               <UIProvider>
                 <Header list={headerList} />
-
                 <Container p='10px' maxW="900px" className="content-wrapper">
                   <AuthWrapper>
                     {children}
                   </AuthWrapper>
-
                 </Container>
-
                 <Footer list={footerList} />
               </UIProvider>
             </AuthProvider>

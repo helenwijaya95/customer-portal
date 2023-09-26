@@ -15,7 +15,7 @@ import Image from "next/image";
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
 import { usePathname, useRouter } from "next/navigation";
 import { signOut } from 'next-auth/react'
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "@/store/userSlice";
 
 const NavLink = (props) => {
@@ -44,7 +44,9 @@ const NavLink = (props) => {
 const Header = ({ list }) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { push } = useRouter()
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
+  const userState = useSelector((state) => state.user)
+  const isLoggedIn = userState.name !== ''
   const signOutHandler = () => {
     dispatch(setUser({
       name: '',
@@ -71,25 +73,29 @@ const Header = ({ list }) => {
               <Link href="/" w='auto'>
                 <Image priority='false' src={logo} alt="logo" width={60} height={60} />
               </Link>
-
             </Box>
-
+            {/* nav menu */}
             <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>
               {list.map((link, idx) => (
                 <NavLink key={idx} link={link}>{link.name}</NavLink>
               ))}
             </HStack>
           </HStack>
-          <Flex alignItems={'center'}>
-            <Button
-              variant={'outline'}
-              colorScheme={'blue'}
-              size={'sm'}
-              onClick={() => signOutHandler()}
-            >
-              Sign out
-            </Button>
-          </Flex>
+          {
+            isLoggedIn && (
+              <Flex alignItems={'center'}>
+                <Button
+                  variant={'outline'}
+                  colorScheme={'blue'}
+                  size={'sm'}
+                  onClick={() => signOutHandler()}
+                >
+                  Sign out
+                </Button>
+              </Flex>
+            )
+          }
+
         </Flex>
 
         {isOpen ? (

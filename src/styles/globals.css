@@ -131,6 +131,15 @@ h5 {
   font-size: 24px;
 }
 
+.info-section h4 {
+  font-weight: 400;
+}
+
+.info-section p:first-child {
+  font-weight: 600;
+}
+
+
 /* END>> common typography */
 
 
@@ -182,4 +191,50 @@ a.active {
 
 .signin {
   background-color: red;
+}
+
+/* card */
+.card-heading {
+  font-size: 22px;
+}
+
+.card-subheading {
+  color: gray;
+  font-size: 15px;
+}
+
+.card {
+  border-top: 3px solid #8ec9ec;
+  padding: 20px 15px;
+  width: calc(50% - 20px);
+  margin: 5px;
+  box-shadow: 2px 2px 5px 1px #dceaf1;
+  border-radius: 5px;
+  transition: box-shadow 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.card:hover {
+  box-shadow: 2px 2px 5px 1px #a2cbdf;
+
+}
+
+@media only screen and (max-width: 480px) {
+  .card {
+    width: 100%;
+  }
+}
+
+/* end of card  */
+
+/* custom table */
+.custom-table {
+  overflow: auto;
+}
+
+/* end of custom table */
+
+@media only screen and (max-width: 480px) {
+  .two-col-heading {
+    flex-direction: column;
+  }
 }

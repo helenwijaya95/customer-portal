@@ -1,8 +1,10 @@
 'use client'
 import React, { useState, useEffect } from 'react'
-import { Box, Heading } from '@chakra-ui/react'
+import { Box, Button, Flex, Heading } from '@chakra-ui/react'
 import axios from 'axios'
 import { useSelector } from 'react-redux'
+import { SmallAddIcon } from '@chakra-ui/icons'
+import { useRouter } from 'next/navigation'
 import CustomTable from '@/components/table/CustomTable'
 import Profile from '@/components/Profile'
 import CardList from '@/components/CardList'
@@ -11,6 +13,7 @@ import Loader from '@/components/Loader'
 const baseURL = "https://reqres.in/api/users";
 
 const Index = () => {
+  const { push } = useRouter();
   const [users, setUsers] = useState([]);
   const [isFetching, setisFetching] = useState(false);
   const userState = useSelector((state) => state.user)
@@ -40,7 +43,7 @@ const Index = () => {
       accessor: "email",
     },
   ]
-  const POLICY_DATA = [
+  const COVERAGE_DATA = [
     {
       heading: 'Clinical',
       subheading: 'Medical Protection',
@@ -85,10 +88,13 @@ const Index = () => {
   return (
     <Box>
       <Profile user={userState} />
-      <Heading>My Coverage</Heading>
-      <CardList dataList={POLICY_DATA} />
+      <Flex className='two-col-heading' justifyContent={'space-between'}>
+        <Heading>My Coverage</Heading>
+        <Button size='md' leftIcon={<SmallAddIcon />} onClick={() => push('/my-coverage')}>Upgrade my coverage</Button>
+      </Flex>
+      <CardList isOwned={true} dataList={COVERAGE_DATA} />
       {/* dependant list */}
-      <Heading>Dependent List</Heading>
+      <Heading mt='25px'>Dependent List</Heading>
       {(!isFetching && users.length > 0)
         ? <CustomTable defaultData={users} columns={COLUMNS} />
         : <Loader text='Retrieving data...' />
