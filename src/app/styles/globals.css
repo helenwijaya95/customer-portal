@@ -95,13 +95,15 @@ a {
   }
 }
 
-body {
+body,
+p {
   font-family: 'Open Sans', sans-serif;
   color: var(--primary-blue);
 }
 
 .header a {
   font-weight: 600;
+  color: var(--primary-blue);
 }
 
 .pagination {
@@ -117,4 +119,39 @@ footer {
 
 .error-msg {
   color: red;
+}
+
+.trans-copy-wrapper {
+  position: relative;
+}
+
+.trans-copy-wrapper::after {
+  content: '';
+  width: 135%;
+  height: 1px;
+  background-color: #dde3e8;
+  display: block;
+  position: absolute;
+  bottom: 0;
+}
+
+a.active {
+  font-weight: bold;
+}
+
+.content-wrapper {
+  min-height: calc(100vh - 100px);
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+@media only screen and (max-width: 767px) {
+  .menu-btn {
+    width: 80px;
+    background: none;
+  }
+}
+
+.signin {
+  background-color: red;
 }

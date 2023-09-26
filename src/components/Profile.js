@@ -1,4 +1,4 @@
-import { Button, Flex, Heading, Image, Center, Box } from '@chakra-ui/react';
+import { Button, Flex, Heading, Image, Center } from '@chakra-ui/react';
 import ImageNext from 'next/image';
 import defaultProfPic from '../assets/default.png'
 const Profile = ({ session, status, signIn, signOut }) => {
@@ -19,18 +19,9 @@ const Profile = ({ session, status, signIn, signOut }) => {
                   priority="false" width='80' height='80' borderRadius='50%' src={defaultProfPic} alt='profile picture' />)
             }
           </Center>
-
-
           <Heading textAlign='center' as='h3' size='lg'>Welcome,<br />{session.user?.name}</Heading>
-
         </Flex>
-
       </Center>
-      <br />
-      <Flex>
-
-        <Button m='auto' variant='outline' size={'xs'} onClick={() => signOut()} colorScheme='gray'>Sign out</Button>
-      </Flex>
     </>
   }
 
