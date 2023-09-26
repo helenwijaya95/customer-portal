@@ -1,24 +1,13 @@
 'use client'
 import React, { useEffect, useState } from "react";
 import { Box } from "@chakra-ui/react";
-import { useRouter } from "next/navigation";
-import { useSession } from "next-auth/react"
 import { fetchData } from "@/helper/fetchData";
 import CustomTable from "@/components/table/CustomTable";
+import Loader from "@/components/Loader";
 
 const Portfolio = () => {
-  const [isSignedIn, setIsSignedIn] = useState(false);
   const [data, setData] = useState([]);
   const [isFetching, setIsFetching] = useState(false)
-
-  const { push } = useRouter;
-  const { session, status } = useSession({
-    required: true,
-    onUnauthenticated: () => {
-      push('/api/auth/signin')
-      return <p>Access Denied</p>
-    },
-  })
 
   useEffect(() => {
     const fetchPortfolio = async () => {
@@ -30,28 +19,20 @@ const Portfolio = () => {
         }
         const response = await fetchData(fetchDataOptions)
         if (response) {
-          console.log(response)
           const retrievedData = response?.rows
           setData(retrievedData)
           setIsFetching(false)
         }
       } catch (e) {
         console.error(e)
+        setIsFetching(false)
       }
     }
     fetchPortfolio()
-    setIsSignedIn(true)
-
   }, [])
-  if (status === "loading") {
-    return "Authenticating..."
-  }
 
-  if (status !== 'authenticated') {
-    return <p>Access Denied</p>
-  }
 
-  const columns = [
+  const COLUMNS = [
     {
       display: "Claim ID",
       accessor: "id"
@@ -75,16 +56,9 @@ const Portfolio = () => {
   ]
   return (
     <Box minH='calc(100vh - 80px)'>
-      {
-        isSignedIn ?
-          <>
-            {(!isFetching && data.length > 0)
-              ? <CustomTable defaultData={data} columns={columns} />
-              : 'Loading...'}
-          </>
-          :
-          <></>
-      }
+      {(!isFetching && data.length > 0)
+        ? <CustomTable defaultData={data} columns={COLUMNS} />
+        : <Loader text='Retrieving data...' />}
     </Box>
 
   )

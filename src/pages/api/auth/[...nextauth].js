@@ -11,7 +11,10 @@ export const authOptions = {
   callbacks: {
     async redirect({ url, baseUrl }) {
       return '/'
-    }
+    },
+    async session({ session, user, token }) {
+      return session
+    },
   },
   session: {
     strategy: 'jwt',

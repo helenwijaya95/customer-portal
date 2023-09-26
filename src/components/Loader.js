@@ -1,8 +1,8 @@
-import { Center, Spinner, Text } from "@chakra-ui/react";
+import { Box, Center, Spinner, Text } from "@chakra-ui/react";
 
 const Loader = ({ text }) => {
   return (
-    <Center flexDirection='column' w='100%' h='100%'>
+    <Center flexDirection='column' >
       <Spinner
         m='auto'
         thickness='4px'
@@ -11,7 +11,9 @@ const Loader = ({ text }) => {
         color='blue.500'
         size='xl'
       />
-      <Text mt='10px'>{text}</Text>
+      <Box>
+        <Text mt='10px'>{text}</Text>
+      </Box>
     </Center>
   )
 }

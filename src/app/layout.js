@@ -1,5 +1,4 @@
-
-import './styles/globals.css'
+import '../styles/globals.css'
 import { Open_Sans } from 'next/font/google'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
@@ -7,6 +6,7 @@ import AuthProvider from '@/components/providers/AuthProvider'
 import UIProvider from '@/components/providers/UIProvider'
 import StoreProvider from '@/components/providers/StoreProvider'
 import { Container } from '@chakra-ui/react'
+import AuthWrapper from '@/components/AuthWrapper'
 const openSans = Open_Sans({ subsets: ['latin'] })
 
 export const metadata = {
@@ -45,9 +45,14 @@ export default function RootLayout({ children }) {
             <AuthProvider>
               <UIProvider>
                 <Header list={headerList} />
+
                 <Container p='10px' maxW="900px" className="content-wrapper">
-                  {children}
+                  <AuthWrapper>
+                    {children}
+                  </AuthWrapper>
+
                 </Container>
+
                 <Footer list={footerList} />
               </UIProvider>
             </AuthProvider>

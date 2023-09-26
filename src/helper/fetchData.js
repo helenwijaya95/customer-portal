@@ -65,7 +65,6 @@ export async function fetchData(options) {
   let generatedData;
   // Simulate some network latency
   await new Promise(r => setTimeout(r, 500))
-  console.log(options.type)
   if (options.type === 'trans') {
     generatedData = modifiedData(transactionData)
   } else {

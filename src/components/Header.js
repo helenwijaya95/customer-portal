@@ -48,7 +48,8 @@ const Header = ({ list }) => {
   const signOutHandler = () => {
     dispatch(setUser({
       name: '',
-      email: ''
+      email: '',
+      image: ''
     }))
     signOut();
     push('/api/auth/signin')

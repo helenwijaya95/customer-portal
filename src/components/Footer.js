@@ -21,7 +21,7 @@ const Footer = ({ list }) => {
                       && item.children.map((child, i) => {
                         return (
                           <Text fontSize="14px" key={i}>
-                            <Link >{child}</Link>
+                            <Link color='white'>{child}</Link>
                           </Text>
                         )
                       }
