@@ -9,6 +9,7 @@ import Form from "@/components/multistep-form/Form"
 import Field from "@/components/multistep-form/Field"
 import ButtonField from "@/components/multistep-form/ButtonField"
 import InputField from "@/components/multistep-form/InputField"
+import DateField from "@/components/multistep-form/DateField"
 
 const PatientStep = () => {
   const dataState = useSelector((state) => state.form.steps)
@@ -47,7 +48,7 @@ const PatientStep = () => {
             id='name' />
         </Field>
         <Field label="Visit Date" error={errors?.visitDate}>
-          <InputField
+          <DateField
             {...register('visitDate', { required: 'Visit Date is required' })}
             id='visit-date' />
         </Field>
