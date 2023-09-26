@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useRouter } from 'next/navigation'
 import { useForm } from "react-hook-form"
@@ -11,16 +11,11 @@ import ButtonField from "@/components/multistep-form/ButtonField"
 import InputField from "@/components/multistep-form/InputField"
 
 const PatientStep = () => {
-  const defaultData = {
-    name: '',
-    visitDate: ''
-  }
   const dataState = useSelector((state) => state.form.steps)
   const dispatch = useDispatch();
   const {
     handleSubmit,
     register,
-    watch,
     formState: { errors }
   } = useForm({ defaultValues: dataState.patient, mode: "onSubmit" })
   const { push } = useRouter();

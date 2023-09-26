@@ -1,13 +1,14 @@
 'use client'
-import ButtonField from "@/components/multistep-form/ButtonField";
-import Form from "@/components/multistep-form/Form";
-import { Section, SectionRow } from "@/components/multistep-form/Section";
-import { setCurrentStep } from "@/store/formSlice";
-import { Heading, Text } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
+import { Heading, Text } from "@chakra-ui/react";
+import ButtonField from "@/components/multistep-form/ButtonField";
+import Form from "@/components/multistep-form/Form";
+import { Section, SectionRow } from "@/components/multistep-form/Section";
+import { setCurrentStep } from "@/store/formSlice";
+
 
 const Confirmation = () => {
   const parentPath = '/claim/submit-form'

@@ -1,24 +1,25 @@
 'use client'
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { setCurrentStep, setFormData } from "@/store/formSlice"
 import { useRouter } from 'next/navigation'
 import { useForm } from "react-hook-form"
 import { Box, FormLabel } from "@chakra-ui/react"
+import { setCurrentStep, setFormData } from "@/store/formSlice"
 import Form from "@/components/multistep-form/Form"
 import Field from "@/components/multistep-form/Field"
 import ButtonField from "@/components/multistep-form/ButtonField"
 import InputField from "@/components/multistep-form/InputField"
+
 const ClinicStep = () => {
   const dataState = useSelector((state) => state.form.steps)
   const dispatch = useDispatch();
+  const { push } = useRouter();
+
   const {
     handleSubmit,
     register,
-    watch,
     formState: { errors }
   } = useForm({ defaultValues: dataState.clinic, mode: "onSubmit" })
-  const { push } = useRouter();
   const saveData = (data) => {
     dispatch(setFormData({ data: data, formType: 'clinic' }))
     push('/claim/submit-form/confirmation')
