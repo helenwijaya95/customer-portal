@@ -8,16 +8,25 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useRouter } from 'next/navigation'
 import { useSession, signIn, signOut } from 'next-auth/react'
 import CardList from './components/CardList'
-
+import { setUser } from './store/userSlice'
 const baseURL = "https://reqres.in/api/users";
 
 const Index = () => {
-  const { data: session, status } = useSession();
-
-  const { push } = useRouter();
   const [users, setUsers] = useState([]);
   const [isSignedIn, setIsSignedIn] = useState(false);
   const [isFetching, setisFetching] = useState(false);
+  const [isAuthLoading, setIsAuthLoading] = useState(false)
+  const userState = useSelector((state) => state.user)
+  const { data: session, status } = useSession({
+    required: true,
+    onUnauthenticated: () => {
+      push('/api/auth/signin')
+      return <p>Access Denied</p>
+    }
+  });
+  const { push } = useRouter();
+  const dispatch = useDispatch();
+
   const filterName = (data, chars) => {
     const filtered = data.filter(d =>
       d['first_name'].charAt(0).toUpperCase() === chars[0] ||
@@ -87,27 +96,25 @@ const Index = () => {
         console.error(e)
       }
     }
+    fetchUsers()
+    setIsSignedIn(true)
 
-    if (isSignedIn) fetchUsers();
-
-  }, [isSignedIn])
+  }, [])
 
   useEffect(() => {
-    console.log(status)
-    console.log(session)
+    if (session)
+      dispatch(setUser({
+        name: session.user.name,
+        email: session.user.email
+      }))
+  }, [session])
 
-    if (status !== 'loading') {
-      if (status == 'unauthenticated' && !session) {
-        console.log('no session')
-        setIsSignedIn(false)
-        push('/api/auth/signin')
-      } else {
-        console.log(session)
-        setIsSignedIn(true)
-      }
-    }
-  }, [session, status])
-
+  if (status === "loading") {
+    return "Authenticating..."
+  }
+  if (status !== 'authenticated') {
+    return <p>Access Denied</p>
+  }
 
   return (
     <Box minH='calc(100vh - 80px)'>
@@ -121,7 +128,7 @@ const Index = () => {
           {/* dependant list */}
           {(!isFetching && users.length > 0)
             ? <CustomTable defaultData={users} columns={columns} />
-            : 'Loading...'}
+            : 'Loading2...'}
         </>
         :
         <></>

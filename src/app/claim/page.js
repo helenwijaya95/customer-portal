@@ -17,7 +17,7 @@ const Claim = () => {
   const { session, status } = useSession({
     required: true,
     onUnauthenticated: () => {
-      push('/')
+      push('/api/auth/signin')
       return <p>Access Denied</p>
     },
   })
@@ -27,21 +27,25 @@ const Claim = () => {
     pageSize: 5
   }
   useEffect(() => {
-    try {
+    const fethClaimData = async () => {
       setIsFetching(true)
-
-      fetchData(fetchDataOptions).then((resp) => {
-        const retrievedData = resp?.rows
-        setData(retrievedData)
-        setIsFetching(false)
-      });
-    } catch (error) {
-      console.log(error)
+      try {
+        const response = await fetchData(fetchDataOptions)
+        if (response) {
+          console.log(response)
+          const retrievedData = response?.rows
+          setData(retrievedData)
+          setIsFetching(false)
+        }
+      } catch (e) {
+        console.error(e)
+      }
     }
+    fethClaimData()
     setIsSignedIn(true)
   }, [])
   if (status === "loading") {
-    return "Loading..."
+    return "Authenticating..."
   }
 
   if (status !== 'authenticated') {
