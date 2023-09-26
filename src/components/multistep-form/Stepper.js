@@ -23,7 +23,7 @@ const Stepper = ({ activeIdx, steps }) => {
   }, [activeIdx, setActiveStep])
   return (
     <>
-      <UIStepper index={activeStep}>
+      <UIStepper className='custom-stepper' index={activeStep}>
         {steps.map((step, index) => (
           <Step key={index}>
             <StepIndicator>

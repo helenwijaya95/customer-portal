@@ -13,7 +13,7 @@ export const Section = ({ title, children, url }) => {
       <Box>
         {children}
       </Box>
-    </Box>
+    </Box >
   )
 }
 

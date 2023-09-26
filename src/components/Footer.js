@@ -4,10 +4,10 @@ const Footer = ({ list }) => {
   return (
     <footer>
       <Container >
-        <Flex justifyContent="space-between" >
+        <Flex className='footer-wrapper' justifyContent="space-between" >
           {
             list.map((item, idx) => (
-              <Flex key={idx}>
+              <Flex key={idx} mt='10px'>
                 <Box>
                   <Link href="#">
                     <Heading as='h4' size='sx'>

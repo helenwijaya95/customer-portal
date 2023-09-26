@@ -3,10 +3,6 @@ import ImageNext from 'next/image';
 import defaultProfPic from '../assets/default.png'
 import { useEffect } from 'react';
 const Profile = ({ user }) => {
-  useEffect(() => {
-    console.log('user')
-    console.log(user)
-  }, [user])
   return (
     <Center >
       <Flex flexDir='column'>

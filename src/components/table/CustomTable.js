@@ -12,7 +12,7 @@ import {
   Image,
   Flex
 } from "@chakra-ui/react";
-import { ViewIcon } from "@chakra-ui/icons"
+import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons"
 import Pagination from "./Pagination";
 import {
   useEffect, useState
@@ -65,14 +65,14 @@ const CustomTable = ({ defaultData, columns }) => {
       return columnHelper.accessor(col.accessor, {
         header: col.display,
         cell: ({ cell }) => (
-          <Flex>
+          <Flex justifyContent='space-between'>
             {!isShowing(cell) && <Text>{maskedEmail(cell.getValue())}</Text>}
             {isShowing(cell) && <Text >{cell.getValue()}</Text>}
             <IconButton
               variant='outline'
               colorScheme='teal'
               aria-label='View email'
-              icon={<ViewIcon />}
+              icon={!isShowing(cell) ? <ViewIcon /> : <ViewOffIcon />}
               ml={'15px'}
               size="sm"
               onClick={() => toggleEmail(cell)}
@@ -90,7 +90,7 @@ const CustomTable = ({ defaultData, columns }) => {
         cell: ({ cell }) => (
           <>
             <Box boxSize='50px'>
-              <Image src={cell.getValue()} alt='' />
+              <Image borderRadius='50%' src={cell.getValue()} alt='' />
             </Box>
           </>
         ),
