@@ -15,12 +15,12 @@ const FormInfo = ({ time, requirements, actionList }) => {
     callback && callback()
   }
   return (
-    <>
+    <Box className='form-info'>
       <Text>
         This form takes about {time} to complete.
       </Text>
-      <Box>
-        <Heading as='h3' size='sm'>
+      <Box mb='25px'>
+        <Heading as='h3' mt = '10px' size='md'>
           You will need:
         </Heading>
         {
@@ -39,6 +39,7 @@ const FormInfo = ({ time, requirements, actionList }) => {
             ) : <>-</>
         }
       </Box>
+      {/* action group section */}
       {
         actionList && actionList.length > 0 &&
         (
@@ -51,7 +52,7 @@ const FormInfo = ({ time, requirements, actionList }) => {
           </Flex>
         )
       }
-    </>
+    </Box>
   )
 }
 

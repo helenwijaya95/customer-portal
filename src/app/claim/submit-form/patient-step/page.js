@@ -12,12 +12,20 @@ import InputField from "@/components/multistep-form/InputField"
 
 const PatientStep = () => {
   const dataState = useSelector((state) => state.form.steps)
+  const { name } = useSelector((state) => state.user)
+  console.log(name)
   const dispatch = useDispatch();
+  const updatedData = {
+    ...dataState,
+    patient: {
+      ...dataState.patient, name: name
+    }
+  }
   const {
     handleSubmit,
     register,
     formState: { errors }
-  } = useForm({ defaultValues: dataState.patient, mode: "onSubmit" })
+  } = useForm({ defaultValues: updatedData.patient, mode: "onSubmit" })
   const { push } = useRouter();
   const saveData = (data) => {
     dispatch(setFormData({ data: data, formType: 'patient' }))

@@ -95,10 +95,15 @@ a {
   }
 }
 
+/* START>> common typography */
 body,
 p {
   font-family: 'Open Sans', sans-serif;
   color: var(--primary-blue);
+}
+
+p {
+  margin-bottom: 10px;
 }
 
 h1,
@@ -109,10 +114,25 @@ h5 {
   margin-bottom: 15px;
 }
 
+.form-info {
+  font-size: 18px;
+}
+
 .header a {
   font-weight: 600;
   color: var(--primary-blue);
 }
+
+.form-wrapper label {
+  font-weight: 600;
+}
+
+.form-wrapper legend {
+  font-size: 24px;
+}
+
+/* END>> common typography */
+
 
 .pagination {
   color: var(--chakra-colors-gray-600)
