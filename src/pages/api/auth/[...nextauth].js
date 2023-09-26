@@ -8,6 +8,11 @@ export const authOptions = {
       clientSecret: process.env.GOOGLE_SECRET,
     })
   ],
+  callbacks: {
+    async redirect({ url, baseUrl }) {
+      return '/'
+    }
+  },
   session: {
     strategy: 'jwt',
   },

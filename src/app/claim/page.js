@@ -1,20 +1,16 @@
 'use client'
-import { Heading, Box, Text, Button, Container } from "@chakra-ui/react";
+import { Heading, Box, Text, Button } from "@chakra-ui/react";
 import { useSession } from "next-auth/react"
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from "react";
-import CustomTable from '../components/table/CustomTable'
-import extData from '../data'
-import { fetchData, Person } from '../helper/fetchData'
-
+import TransactionList from "@/components/TransactionList";
+import { fetchData } from "@/helper/fetchData";
 const Claim = () => {
   const [isSignedIn, setIsSignedIn] = useState(false);
-  const [data, setData] = useState([]);
-  const [isFetching, setIsFetching] = useState(false);
-
-
+  const [isFetching, setIsFetching] = useState(false)
+  const [data, setData] = useState([])
   const { push } = useRouter();
-  const { session, status } = useSession({
+  const { status } = useSession({
     required: true,
     onUnauthenticated: () => {
       push('/api/auth/signin')
@@ -22,26 +18,28 @@ const Claim = () => {
     },
   })
 
-  const fetchDataOptions = {
-    pageIndex: 0,
-    pageSize: 5
-  }
   useEffect(() => {
-    const fethClaimData = async () => {
+    const fetchTransaction = async () => {
       setIsFetching(true)
       try {
-        const response = await fetchData(fetchDataOptions)
+        const options = {
+          type: 'trans',
+          pageIndex: 0,
+          pageSize: 5
+        }
+        const response = await fetchData(options);
         if (response) {
           console.log(response)
           const retrievedData = response?.rows
           setData(retrievedData)
           setIsFetching(false)
         }
-      } catch (e) {
-        console.error(e)
+      } catch (error) {
+        console.log(error)
       }
     }
-    fethClaimData()
+    console.log(data)
+    fetchTransaction()
     setIsSignedIn(true)
   }, [])
   if (status === "loading") {
@@ -51,28 +49,6 @@ const Claim = () => {
   if (status !== 'authenticated') {
     return <p>Access Denied</p>
   }
-  const columns = [
-    {
-      display: "Claim ID",
-      accessor: "id"
-    },
-    {
-      display: "Type",
-      accessor: "type"
-    },
-    {
-      display: "Submission Date",
-      accessor: "submission_date"
-    },
-    {
-      display: "Amount",
-      accessor: "amount",
-    },
-    {
-      display: "Status",
-      accessor: "status",
-    },
-  ]
 
   return (
 
@@ -83,9 +59,11 @@ const Claim = () => {
         <>
           <Button size='md' onClick={() => push('/claim/submit-form')}>Submit Claim</Button>
           <Text>User is logged in</Text>
-          {(!isFetching && data.length > 0)
-            ? <CustomTable defaultData={data} columns={columns} />
-            : 'Loading...'}
+          {
+            (!isFetching && data.length > 0)
+              ? <TransactionList data={data}/>
+              : 'Loading...'
+          }
         </>
         :
         <></>

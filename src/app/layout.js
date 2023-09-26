@@ -1,11 +1,11 @@
 
 import './styles/globals.css'
 import { Open_Sans } from 'next/font/google'
-import Header from './components/Header'
-import Footer from './components/Footer'
-import AuthProvider from './components/providers/AuthProvider'
-import UIProvider from './components/providers/UIProvider'
-import StoreProvider from './components/providers/StoreProvider'
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
+import AuthProvider from '@/components/providers/AuthProvider'
+import UIProvider from '@/components/providers/UIProvider'
+import StoreProvider from '@/components/providers/StoreProvider'
 import { Container } from '@chakra-ui/react'
 const openSans = Open_Sans({ subsets: ['latin'] })
 
@@ -17,8 +17,26 @@ export const metadata = {
 export default function RootLayout({ children }) {
   const headerList = [
     { name: 'Home', path: '/' },
-    { name: 'Portfolio', path: 'portfolio' },
+    { name: 'Portfolio', path: '/portfolio' },
     { name: 'Claim', path: '/claim' }]
+  const footerList = [
+    {
+      header: 'Contact',
+      children: ['link 1', 'link 2', 'link 3']
+    },
+    {
+      header: 'About',
+      children: ['link 1']
+    },
+    {
+      header: 'Explore',
+      children: ['link 1', 'link 2', 'link 3']
+    },
+    {
+      header: 'Solution',
+      children: ['link 1', 'link 2',]
+    }
+  ]
   return (
     <html lang="en">
       <body className={openSans.className}>
@@ -27,10 +45,10 @@ export default function RootLayout({ children }) {
             <AuthProvider>
               <UIProvider>
                 <Header list={headerList} />
-                <Container p='10px' maxW="900px">
+                <Container p='10px' maxW="900px" className="content-wrapper">
                   {children}
                 </Container>
-                <Footer />
+                <Footer list={footerList} />
               </UIProvider>
             </AuthProvider>
           </StoreProvider>
