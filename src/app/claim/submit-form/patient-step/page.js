@@ -14,7 +14,6 @@ import DateField from "@/components/multistep-form/DateField"
 const PatientStep = () => {
   const dataState = useSelector((state) => state.form.steps)
   const { name } = useSelector((state) => state.user)
-  console.log(name)
   const dispatch = useDispatch();
   const updatedData = {
     ...dataState,

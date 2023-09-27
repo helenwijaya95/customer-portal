@@ -29,6 +29,8 @@ const CustomTable = ({ defaultData, columns }) => {
     })
     return findEmail?.display
   }
+
+  // mask all, display current target
   const toggleEmail = (cell) => {
     const { id } = cell?.row?.original
     const stat = displayEmail.find(d => {
@@ -47,6 +49,7 @@ const CustomTable = ({ defaultData, columns }) => {
 
     setDisplayEmail(newDisplayEmail)
   }
+
   const maskedEmail = (email) => {
     var maskedEmail = email.replace(/([^@\.])/g, "*").split('');
     var previous = "";
@@ -83,7 +86,7 @@ const CustomTable = ({ defaultData, columns }) => {
       })
     }
 
-    // cell with image
+    // image cell
     if (col.accessor === 'avatar') {
       return columnHelper.accessor(col.accessor, {
         header: col.display,
@@ -97,6 +100,8 @@ const CustomTable = ({ defaultData, columns }) => {
         footer: info => info.column.id,
       })
     }
+
+    // default cell as plain text
     return columnHelper.accessor(col.accessor, {
       header: col.display,
       footer: info => info.column.id,

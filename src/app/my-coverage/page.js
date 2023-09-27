@@ -2,7 +2,7 @@ import CardList from "@/components/CardList"
 import { Box, Heading } from "@chakra-ui/react"
 const COVERAGE_DATA = [
   {
-    heading: 'Clinical',
+    subheading: 'Clinical',
     subheading: 'Medical Protection',
     bodyText1: 'Policy Number: 1111',
     bodyText2: 'Policy Period: 21 November 2023 - 21 November 2024',
@@ -16,28 +16,24 @@ const COVERAGE_DATA = [
 ]
 const NEW_COVERAGE = [
   {
-    heading: 'Clinical',
-    subheading: 'Medical Protection',
-    bodyText1: 'Policy Number: 1111',
-    bodyText2: 'Policy Period: 21 November 2023 - 21 November 2024',
+    subheading: 'Clinical',
+    heading: 'Life Shield Plus',
+    bodyText1: 'Policy Period: 5 years',
   },
   {
-    heading: 'Dental',
-    subheading: 'Medical Protection',
-    bodyText1: 'Policy Number: 2222',
-    bodyText2: 'Policy Period: 21 November 2023 - 21 November 2024',
+    subheading: 'Clinical',
+    heading: 'Life Shield Lite',
+    bodyText1: 'Policy Period: 2 yeas',
   },
   {
-    heading: 'Dental',
-    subheading: 'Medical Protection',
-    bodyText1: 'Policy Number: 2222',
-    bodyText2: 'Policy Period: 21 November 2023 - 21 November 2024',
+    subheading: 'Clinical',
+    heading: 'Life Shield Pro',
+    bodyText1: 'Policy Period: 6 months',
   },
   {
-    heading: 'Dental',
-    subheading: 'Medical Protection',
-    bodyText1: 'Policy Number: 2222',
-    bodyText2: 'Policy Period: 21 November 2023 - 21 November 2024',
+    subheading: 'Clinical',
+    heading: 'Life Shield',
+    bodyText1: 'Policy Period: 10 years',
   },
 ]
 const MyCoverage = () => {

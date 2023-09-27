@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useState } from "react";
-import { Box } from "@chakra-ui/react";
+import { Box, Heading } from "@chakra-ui/react";
 import { fetchData } from "@/helper/fetchData";
 import CustomTable from "@/components/table/CustomTable";
 import Loader from "@/components/Loader";
@@ -56,6 +56,7 @@ const Portfolio = () => {
   ]
   return (
     <Box>
+      <Heading as='h1'>Portfolio</Heading>
       {(!isFetching && data.length > 0)
         ? <CustomTable defaultData={data} columns={COLUMNS} />
         : <Loader text='Retrieving data...' />}

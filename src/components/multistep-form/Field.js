@@ -1,6 +1,7 @@
 import { Box, FormLabel } from "@chakra-ui/react"
 import React from "react"
 
+// input field wrapper: show label and error message
 const Field = ({ children, label, error }) => {
   const id = getChildId(children)
   return (

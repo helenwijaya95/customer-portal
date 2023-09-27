@@ -1,3 +1,4 @@
+// Store multi-step form data
 import { createSlice } from "@reduxjs/toolkit";
 
 export const formSlice = createSlice({

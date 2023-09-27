@@ -6,8 +6,7 @@ const TransactionList = ({ data }) => {
   const [defaultData, setDefaultData] = useState([])
   useEffect(() => {
     setDefaultData(data)
-    console.log(defaultData)
-  }, [defaultData])
+  }, [data])
 
   return (
     <Box>

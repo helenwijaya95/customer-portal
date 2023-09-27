@@ -94,7 +94,7 @@ const Index = () => {
       </Flex>
       <CardList isOwned={true} dataList={COVERAGE_DATA} />
       {/* dependant list */}
-      <Heading mt='25px'>Dependent List</Heading>
+      <Heading mt='25px'>Dependant</Heading>
       {(!isFetching && users.length > 0)
         ? <CustomTable defaultData={users} columns={COLUMNS} />
         : <Loader text='Retrieving data...' />

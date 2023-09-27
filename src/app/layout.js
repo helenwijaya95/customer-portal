@@ -46,8 +46,6 @@ export default function RootLayout({ children }) {
       <body className={openSans.className}>
         <>
           <ErrorBoundary>
-
-
             <StoreProvider>
               <AuthProvider>
                 <UIProvider>

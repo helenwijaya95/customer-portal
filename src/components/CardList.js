@@ -13,8 +13,8 @@ const CardList = ({ dataList, isOwned }) => {
                   <Text className='card-subheading'>{data.subheading}</Text>
                 </Box>
                 <Box className="body">
-                  <Text >{data.bodyText1}</Text>
-                  <Text >{data.bodyText2}</Text>
+                  { data.bodyText1 && <Text >{data.bodyText1}</Text>}
+                  { data.bodyText2 && <Text >{data.bodyText2}</Text>}                  
                 </Box>
               </Flex>
               <Button isDisabled={true} size='sm'>Purchase</Button>

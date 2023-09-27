@@ -1,7 +1,6 @@
-import { Button, Flex, Heading, Image, Center } from '@chakra-ui/react';
+import { Flex, Heading, Image, Center } from '@chakra-ui/react';
 import ImageNext from 'next/image';
 import defaultProfPic from '../assets/default.png'
-import { useEffect } from 'react';
 const Profile = ({ user }) => {
   return (
     <Center >

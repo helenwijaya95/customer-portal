@@ -1,3 +1,5 @@
+// Store current login user data
+
 import { createSlice } from "@reduxjs/toolkit";
 
 export const userSlice = createSlice({

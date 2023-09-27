@@ -13,7 +13,7 @@ import Link from "next/link";
 import logo from '../assets/logo.png'
 import Image from "next/image";
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname} from "next/navigation";
 import { signOut } from 'next-auth/react'
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "@/store/userSlice";
@@ -43,7 +43,6 @@ const NavLink = (props) => {
 // import Link from "next/link";
 const Header = ({ list }) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const { push } = useRouter()
   const dispatch = useDispatch()
   const userState = useSelector((state) => state.user)
   const isLoggedIn = userState.name !== ''
@@ -95,7 +94,6 @@ const Header = ({ list }) => {
             </Flex>
 
           }
-
         </Flex>
 
         {isOpen ? (

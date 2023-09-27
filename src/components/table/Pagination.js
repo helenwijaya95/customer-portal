@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import {
   Flex,
   IconButton,
@@ -18,23 +18,11 @@ import {
   ChevronLeftIcon
 } from "@chakra-ui/icons";
 const Pagination = ({ table }) => {
-  const [{ pageIndex, pageSize }, setPagination] = useState({
+  const [{ pageIndex, pageSize }] = useState({
     pageIndex: 0,
     pageSize: 5
   })
 
-  const fetchDataOptions = {
-    pageIndex,
-    pageSize,
-  }
-
-  const pagination = useMemo(
-    () => ({
-      pageIndex,
-      pageSize,
-    }),
-    [pageIndex, pageSize]
-  )
   return (
     <Flex justifyContent="space-between" className="pagination" m={2} alignItems="center">
 
