@@ -1,5 +1,5 @@
 'use client'
-import { Component } from "react"
+import { Component, useState } from "react"
 class ErrorBoundary extends Component {
   constructor(props) {
     super(props)

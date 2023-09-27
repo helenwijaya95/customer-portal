@@ -90,7 +90,7 @@ const Index = () => {
       <Profile user={userState} />
       <Flex className='two-col-heading' justifyContent={'space-between'}>
         <Heading>My Coverage</Heading>
-        <Button size='md' leftIcon={<SmallAddIcon />} onClick={() => push('/my-coverage')}>Upgrade my coverage</Button>
+        <Button size='sm' colorScheme='blue' aria-label="Upgrade my coverage" leftIcon={<SmallAddIcon />} onClick={() => push('/my-coverage')}>Upgrade my coverage</Button>
       </Flex>
       <CardList isOwned={true} dataList={COVERAGE_DATA} />
       {/* dependant list */}

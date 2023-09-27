@@ -21,7 +21,7 @@ const TransactionList = ({ data }) => {
                 <Text>{trans.category}</Text>
               </Box>
               <Center>
-                <Button size='sm'>Show details</Button>
+                <Button isDisabled={true} size='sm'>Show details</Button>
               </Center>
             </Flex>
           )

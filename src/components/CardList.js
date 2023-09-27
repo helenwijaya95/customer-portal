@@ -1,4 +1,4 @@
-import { Box, Flex, Text } from "@chakra-ui/react"
+import { Box, Button, Flex, Text } from "@chakra-ui/react"
 
 const CardList = ({ dataList, isOwned }) => {
   return (
@@ -17,6 +17,8 @@ const CardList = ({ dataList, isOwned }) => {
                   <Text >{data.bodyText2}</Text>
                 </Box>
               </Flex>
+              <Button isDisabled={true} size='sm'>Purchase</Button>
+
             </Box>
           )
         })
