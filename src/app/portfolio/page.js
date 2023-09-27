@@ -56,7 +56,7 @@ const Portfolio = () => {
   ]
   return (
     <Box>
-      <Heading as='h1'>Portfolio</Heading>
+      <Heading as='h1' textAlign='center'>Portfolio</Heading>
       {(!isFetching && data.length > 0)
         ? <CustomTable defaultData={data} columns={COLUMNS} />
         : <Loader text='Retrieving data...' />}

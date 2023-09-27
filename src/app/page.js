@@ -48,13 +48,15 @@ const Index = () => {
       heading: 'Clinical',
       subheading: 'Medical Protection',
       bodyText1: 'Policy Number: 1111',
-      bodyText2: 'Policy Period: 21 November 2023 - 21 November 2024'
+      bodyText2: 'Policy Period: 21 November 2023 - 21 November 2024',
+      hasAction: false
     },
     {
       heading: 'Dental',
       subheading: 'Medical Protection',
       bodyText1: 'Policy Number: 2222',
-      bodyText2: 'Policy Period: 21 November 2023 - 21 November 2024'
+      bodyText2: 'Policy Period: 21 November 2023 - 21 November 2024',
+      hasAction: false
     },
   ]
 
