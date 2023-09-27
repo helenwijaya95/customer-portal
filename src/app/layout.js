@@ -7,6 +7,8 @@ import UIProvider from '@/components/providers/UIProvider'
 import StoreProvider from '@/components/providers/StoreProvider'
 import { Container } from '@chakra-ui/react'
 import AuthWrapper from '@/components/AuthWrapper'
+import ErrorBoundary from '../components/ErrorBoundary'
+
 const openSans = Open_Sans({ subsets: ['latin'] })
 
 export const metadata = {
@@ -43,19 +45,23 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={openSans.className}>
         <>
-          <StoreProvider>
-            <AuthProvider>
-              <UIProvider>
-                <Header list={headerList} />
-                <Container p='10px' maxW="900px" className="content-wrapper">
-                  <AuthWrapper>
-                    {children}
-                  </AuthWrapper>
-                </Container>
-                <Footer list={footerList} />
-              </UIProvider>
-            </AuthProvider>
-          </StoreProvider>
+          <ErrorBoundary>
+
+
+            <StoreProvider>
+              <AuthProvider>
+                <UIProvider>
+                  <Header list={headerList} />
+                  <Container p='10px' maxW="900px" className="content-wrapper">
+                    <AuthWrapper>
+                      {children}
+                    </AuthWrapper>
+                  </Container>
+                  <Footer list={footerList} />
+                </UIProvider>
+              </AuthProvider>
+            </StoreProvider>
+          </ErrorBoundary>
         </>
       </body>
     </html >

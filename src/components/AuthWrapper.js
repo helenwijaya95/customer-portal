@@ -1,22 +1,19 @@
 'use client'
-import { useRouter } from 'next/navigation'
+import { redirect, useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
 import { useEffect, useState } from 'react';
 import Loader from './Loader';
 import { useDispatch } from 'react-redux'
 import { setUser } from '@/store/userSlice'
-
+import { usePathname } from 'next/navigation';
+import Error from 'next/error'
 const AuthWrapper = ({ children }) => {
   const { push } = useRouter();
   const [isSignedIn, setIsSignedIn] = useState(false);
   const dispatch = useDispatch();
-
+  const pathname = usePathname()
   const { data: session, status } = useSession({
     required: true,
-    onUnauthenticated: () => {
-      push('/api/auth/signin')
-      return <p>Access Denied</p>
-    }
   });
   useEffect(() => {
     if (session) {
@@ -35,6 +32,7 @@ const AuthWrapper = ({ children }) => {
       setIsSignedIn(true)
     }
   }, [])
+
   if (status === "loading") {
     return (
       <Loader />

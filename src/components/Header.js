@@ -54,7 +54,6 @@ const Header = ({ list }) => {
       image: ''
     }))
     signOut();
-    push('/api/auth/signin')
   }
   return (
     <>
