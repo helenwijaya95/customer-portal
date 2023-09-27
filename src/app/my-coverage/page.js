@@ -41,7 +41,7 @@ const MyCoverage = () => {
     <Box>
       <Heading mt='20px' textAlign='center'>My Coverage</Heading>
       <CardList isOwned={true} dataList={COVERAGE_DATA} ></CardList>
-      <Heading mt='20px'>New Products</Heading>
+      <Heading mt='20px' fontSize='28px'>New Products</Heading>
       <CardList isOwned={false} dataList={NEW_COVERAGE} ></CardList>
     </Box>
 
