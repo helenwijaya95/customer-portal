@@ -81,18 +81,19 @@ const Header = ({ list }) => {
             </HStack>
           </HStack>
           {
-            isLoggedIn && (
-              <Flex alignItems={'center'}>
-                <Button
-                  variant={'outline'}
-                  colorScheme={'blue'}
-                  size={'sm'}
-                  onClick={() => signOutHandler()}
-                >
-                  Sign out
-                </Button>
-              </Flex>
-            )
+
+            <Flex alignItems={'center'}>
+              <Button
+                variant={'outline'}
+                colorScheme={'blue'}
+                size={'sm'}
+                onClick={() => signOutHandler()}
+                isDisabled={!isLoggedIn}
+              >
+                Sign out
+              </Button>
+            </Flex>
+
           }
 
         </Flex>
