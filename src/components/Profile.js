@@ -7,9 +7,9 @@ const Profile = ({ user }) => {
       <Flex flexDir='column'>
         <Center>
           {
-            user.image ?
+            user.picture ?
               (<Image
-                priority="false" width='80px' height='80px' borderRadius='50%' src={user.image}
+                priority="false" width='80px' height='80px' borderRadius='50%' src={user.picture}
                 alt='profile picture' />) :
 
               (<ImageNext
