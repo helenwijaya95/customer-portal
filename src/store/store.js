@@ -1,13 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit"
+import { userSlice } from "./userSlice"
 import { authSlice } from "./authSlice"
-import { dependantSlice } from "./dependantSlice"
 import { createWrapper } from "next-redux-wrapper"
 
 const makeStore = () =>
   configureStore({
     reducer: {
+      [userSlice.name]: userSlice.reducer,
       [authSlice.name]: authSlice.reducer,
-      [dependantSlice.name]: dependantSlice.reducer
     },
     devTools: true
   })

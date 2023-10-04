@@ -2,6 +2,7 @@ import { Component } from "react"
 import Header from "./Header"
 import UIProvider from "./providers/UIProvider"
 import Footer from "./Footer"
+import { Container } from "@chakra-ui/react"
 
 class Layout extends Component {
   render() {
@@ -9,7 +10,9 @@ class Layout extends Component {
     return (
       <UIProvider>
         <Header logout={logout} user={user} list={headerList} />
-        {children}
+        <Container p='10px' maxW="900px" className="content-wrapper">
+          {children}
+        </Container>
         <Footer list={footerList} />
       </UIProvider>
     )

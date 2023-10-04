@@ -1,17 +1,21 @@
 import '@/styles/globals.css'
-import { getUserFromSession } from "../context/authContext";
 import App from "next/app";
 import Head from 'next/head';
-import { wrapper } from "../store/store";
 import Layout from '@/components/Layout';
-
+import { getUserFromSession } from "../context/authContext";
+import { wrapper } from "../store/store";
+import { useDispatch } from 'react-redux';
+import { setUserState } from '@/store/userSlice';
 function MyApp({ Component, pageProps, user }) {
   const getLayout = Component.getLayout || ((page) => page);
-  const headerList = [
+  const dispatch = useDispatch();
+
+  const NAV_LIST = [
     { name: 'Home', path: '/' },
-    { name: 'Portfolio', path: '/portfolio' },
+    // { name: 'Portfolio', path: '/portfolio' },
   ]
-  const footerList = [
+
+  const FOOTER_LIST = [
     {
       header: 'Contact',
       children: ['link 1', 'link 2', 'link 3']
@@ -29,11 +33,13 @@ function MyApp({ Component, pageProps, user }) {
       children: ['link 1', 'link 2',]
     }
   ]
+
   async function logout(router) {
     const res = await fetch("/api/auth/logout");
     const data = await res.json();
     if (data.status === 200) {
-      router.push("/");
+      dispatch(setUserState({}))
+      router.push("/")
     }
   }
 
@@ -48,8 +54,8 @@ function MyApp({ Component, pageProps, user }) {
         <Layout
           logout={logout}
           user={user}
-          headerList={headerList}
-          footerList={footerList}>
+          headerList={NAV_LIST}
+          footerList={FOOTER_LIST}>
           <Component {...pageProps} />
         </Layout>)}
     </>

@@ -1,3 +1,4 @@
+import { Box, Button, Container, Heading } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 
 const Error = () => {
@@ -8,10 +9,10 @@ const Error = () => {
     router.push(data.Location);
   }
   return (
-    <div>
-      <h1>You're unauthorized</h1>
-      <button onClick={() => login(router)}>Please login via Google</button>
-    </div>
+    <Container>
+      <Heading>Authorization Required</Heading>
+      <Button onClick={() => login(router)}>Please login via Google</Button>
+    </Container>
   )
 }
 

@@ -17,18 +17,16 @@ import {
   Stack,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
-import logo from '../assets/logo.png'
+import logo from '../images/logo.png'
 
 const NavLink = (props) => {
   const { children } = props
   const pathname = usePathname()
   const href = props.link.path
   const isActive = pathname === href;
-
   return (
     <Link
       className={isActive ? 'active' : ''}
-      as="a"
       px={2}
       py={1}
       rounded={'md'}
@@ -45,7 +43,7 @@ const NavLink = (props) => {
 const Header = ({ currentItem, logout, user, list }) => {
   const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const isLoggedIn = user === null ? false : true
+  const isLoggedIn = user == undefined ? false : true
 
   return (
     <Box className="header" bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
@@ -76,24 +74,16 @@ const Header = ({ currentItem, logout, user, list }) => {
         {
 
           <Flex alignItems={'center'}>
-            {!isLoggedIn ? <Button
+            <Button
               variant={'outline'}
               colorScheme={'blue'}
               size={'sm'}
-
-            >
-              Sign in with Google
-            </Button> : <Button
-              variant={'outline'}
-              colorScheme={'blue'}
-              size={'sm'}
+              isDisabled={!isLoggedIn}
               onClick={() => logout(router)}
             >
               Logout
-            </Button>}
-
+            </Button>
           </Flex>
-
         }
       </Flex>
       {isOpen ? (

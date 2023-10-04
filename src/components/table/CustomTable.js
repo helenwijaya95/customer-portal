@@ -13,7 +13,6 @@ import {
   Flex
 } from "@chakra-ui/react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons"
-import Pagination from "./Pagination";
 import {
   useEffect, useState
 } from "react";
@@ -156,7 +155,6 @@ const CustomTable = ({ defaultData, columns }) => {
           ))}
         </Tbody>
       </Table>
-      <Pagination table={customTable} />
     </Box>
   )
 }
